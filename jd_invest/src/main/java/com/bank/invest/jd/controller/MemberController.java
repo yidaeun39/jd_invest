@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.bank.invest.jd.service.JdInvestService;
+import com.bank.invest.jd.service.MemberService;
 import com.bank.invest.jd.vo.Member;
 
 @Controller
-public class JdInvestController {
+public class MemberController {
 
 	@Autowired
-	private JdInvestService jdInvestService;
+	private MemberService memberService;
 	
 	@GetMapping("/index")
 	public String index() {
@@ -29,7 +29,7 @@ public class JdInvestController {
 	
 	@PostMapping("/login")
 	public String login(Member member, Model model, HttpSession session) {
-		Member resultMember = jdInvestService.login(member);
+		Member resultMember = memberService.login(member);
 		System.out.println("resultMember -> " + resultMember);
 		session.setAttribute("memberId", member.getMemberId());
 		model.addAttribute("member", resultMember);
@@ -43,4 +43,14 @@ public class JdInvestController {
 		return "redirect:/index";
 	}
 	
+	@GetMapping("/memberAdd")
+	public String memberAdd() {
+		return "memberAdd";
+	}
+	
+	@PostMapping("/memberAdd")
+	public String memberAdd(Member member) {
+		memberService.memberInsert(member);
+		return "redirect:/login";
+	}
 }

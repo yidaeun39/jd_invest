@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="com.bank.invest.jd.mapper.JdInvestMapper">
+<mapper namespace="com.bank.invest.jd.mapper.MemberMapper">
 	<select id="login" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
 		SELECT
 			member_id AS memberId,
@@ -12,4 +12,21 @@
 		WHERE member_id = #{memberId}
 		AND member_pw = #{memberPw}
 	</select>
+	
+	<insert id="memberInsert" parameterType="com.bank.invest.jd.vo.Member">
+		INSERT INTO member (
+			member_id,
+			member_pw,
+			member_name,
+			member_address,
+			member_phone,
+			branch_code)
+		VALUES (
+			#{memberId},
+			#{memberPw},
+			#{memberName},
+			#{memberAddress},
+			#{memberPhone},
+			#{branchCode})
+	</insert>
 </mapper>

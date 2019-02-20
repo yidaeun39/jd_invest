@@ -13,7 +13,8 @@
 	</div>
 	<div th:unless="${member} != null">
 		<span>로그인 해주세요.</span>
-		<span><a th:href="@{/login}"><button id="login">LOGIN</button></a></span>
+		<span><a th:href="@{/login}"><button id="login">LOGIN</button></a></span><br>
+		<span><a th:href="@{/memberAdd}"><button id="signup">SIGNUP</button></a></span>
 	</div>
 </body>
 </html>

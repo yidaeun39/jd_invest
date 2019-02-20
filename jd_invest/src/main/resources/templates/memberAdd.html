@@ -1,0 +1,44 @@
+<html xmlns:th='http://www.thymleaf.org'>
+<html>
+	<title>회원 가입</title>
+	<!-- input 태그 유효성 검사 -->
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<form action="/memberAdd" method="post">
+		<table>
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" id="memberId" name="memberId"></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="text" id="memberPw" name="memberPw"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" id="memberName" name="memberName"></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td>
+					<select id="memberAddress" name="memberAddress">
+						<option value="서신점">서신점</option>
+						<option value="호성점">호성점</option>
+						<option value="봉동점">봉동점</option>
+						<option value="부산점">부산점</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>휴대폰번호</th>
+				<td><input type="text" id="memberPhone" name="memberPhone"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" id="submitBtn" value="가입"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
