@@ -2,9 +2,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 나중에 logoutBtn 유효성 검사 -->
 </head>
 <body>
-	<span th:text="${member.memberId}"></span><br>
-	<span th:text="${member.memberPw}"></span>
+	<div th:if="${member} != null">
+		<span>환영합니다! 당신의 아이디는 </span>
+		<span th:text="${member.memberId}"></span>
+		<span>입니다.</span>
+		<span id="logoutBtn"><a th:href="@{/logout}"><button id="logout">LOGOUT</button></a></span>
+	</div>
+	<div th:unless="${member} != null">
+		<span>로그인 해주세요.</span>
+		<span><a th:href="@{/login}"><button id="login">LOGIN</button></a></span>
+	</div>
 </body>
 </html>
