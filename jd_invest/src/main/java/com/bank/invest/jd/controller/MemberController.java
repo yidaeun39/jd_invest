@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bank.invest.jd.service.MemberService;
 import com.bank.invest.jd.vo.Member;
@@ -31,7 +32,7 @@ public class MemberController {
 	public String login(Member member, Model model, HttpSession session) {
 		Member resultMember = memberService.login(member);
 		System.out.println("resultMember -> " + resultMember);
-		session.setAttribute("memberId", member.getMemberId());
+		session.setAttribute("sessionId", member.getMemberId());
 		model.addAttribute("member", resultMember);
 		return "index";
 	}
@@ -53,4 +54,14 @@ public class MemberController {
 		memberService.memberInsert(member);
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/myPage")
+	public String myPage(@RequestParam(value="sessionId")String sessionId, Model model) {
+		Member member = memberService.myPage(sessionId);
+		model.addAttribute("member",member);
+		System.out.println("mypage->"+member);
+		return "myPage";
+	}
+	
+	
 }

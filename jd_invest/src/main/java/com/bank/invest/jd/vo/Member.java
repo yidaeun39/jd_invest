@@ -3,7 +3,7 @@ package com.bank.invest.jd.vo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Member {
+public class Member{
 	private String memberId;
 	private String memberPw;
 	private String memberName;

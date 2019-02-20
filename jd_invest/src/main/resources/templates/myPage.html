@@ -1,0 +1,28 @@
+<html xmlns:th='http://www.thymleaf.org'>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 나중에 logoutBtn 유효성 검사 -->
+</head>
+<body>
+	<table>
+		<tr>
+			<th>아이디 : </th>
+			<td th:text="${member.memberId}"></td>
+		</tr>
+		<tr>
+			<th>이름 : </th>
+			<td th:text="${member.memberName}"></td>
+		</tr>
+		<tr>
+			<th>주소 : </th>
+			<td th:text="${member.memberAddress}"></td>
+		</tr>
+		<tr>
+			<th>전화번호 : </th>
+			<td th:text="${member.memberPhone}"></td>
+		</tr>
+	</table>
+
+</body>
+</html>

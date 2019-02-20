@@ -35,4 +35,12 @@ public class MemberService {
 		return result;
 		
 	}
+	
+	public Member myPage(String sessionId) {
+		
+		return memberMapper.myPage(sessionId);
+		
+	}
+	
+	
 }

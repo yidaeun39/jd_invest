@@ -29,4 +29,17 @@
 			#{memberPhone},
 			#{branchCode})
 	</insert>
+	
+	<select id="myPage" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
+		SELECT 
+			m.member_id AS memberId,
+			m.member_pw AS memberPw,
+			m.member_name AS memberName,
+			m.member_address AS memberAddress,
+			m.member_phone AS memberPhone		
+		FROM member AS m JOIN management AS g 
+		ON m.branch_code = g.branch_code
+		WHERE member_id = #{session.sessionId}
+	</select>
+	
 </mapper>

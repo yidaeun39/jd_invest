@@ -11,4 +11,8 @@ public interface MemberMapper {
 	
 	// 회원 가입 처리 INSERT문
 	int memberInsert(Member member);
+	
+	// 마이 페이지 SELECT문
+	Member myPage(String sessionId);
+	
 }

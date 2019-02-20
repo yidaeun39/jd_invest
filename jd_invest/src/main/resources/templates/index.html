@@ -7,8 +7,9 @@
 <body>
 	<div th:if="${member} != null">
 		<span>환영합니다! 당신의 아이디는 </span>
-		<span th:text="${member.memberId}"></span>
+		<span th:text="${session.sessionId}"></span>
 		<span>입니다.</span>
+		<span id="myPageBtn"><a th:href="@{/myPage(sessionId=${session.sessionId})}"><button id="myPage">MY PAGE</button></a></span>
 		<span id="logoutBtn"><a th:href="@{/logout}"><button id="logout">LOGOUT</button></a></span>
 	</div>
 	<div th:unless="${member} != null">
