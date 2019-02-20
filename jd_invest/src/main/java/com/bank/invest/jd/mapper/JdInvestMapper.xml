@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.bank.invest.jd.mapper.JdInvestMapper">
+	<select id="login" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
+		SELECT
+			member_id AS memberId,
+			member_pw AS memberPw
+		FROM member
+		WHERE member_id = #{memberId}
+		AND member_pw = #{memberPw}
+	</select>
+</mapper>
