@@ -13,7 +13,7 @@ import com.bank.invest.jd.vo.Member;
 public class JdInvestController {
 
 	@Autowired
-	private JdInvestService jdInvestSercive;
+	private JdInvestService jdInvestService;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -22,10 +22,9 @@ public class JdInvestController {
 	
 	@PostMapping("/login")
 	public String login(Member member, Model model) {
-		Member resultMember = jdInvestSercive.login(member);
+		Member resultMember = jdInvestService.login(member);
 		System.out.println("resultMember -> " + resultMember);
 		model.addAttribute("member", resultMember);
 		return "index";
 	}
-	
 }

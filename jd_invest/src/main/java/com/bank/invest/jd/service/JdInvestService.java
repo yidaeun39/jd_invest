@@ -16,7 +16,6 @@ public class JdInvestService {
 	
 	public Member login(Member member) {
 		Member resultMember = jdInvestMapper.login(member);
-		System.out.println("resultMember -> " + resultMember);
 		return resultMember;
 	}
 }

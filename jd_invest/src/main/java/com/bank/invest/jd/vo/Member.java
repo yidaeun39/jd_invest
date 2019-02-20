@@ -1,9 +1,5 @@
 package com.bank.invest.jd.vo;
 
-import org.springframework.context.annotation.Configuration;
-
-
-@Configuration
 public class Member {
 	private String memberId;
 	private String memberPw;
