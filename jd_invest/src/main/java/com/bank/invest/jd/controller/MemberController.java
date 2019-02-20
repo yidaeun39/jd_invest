@@ -29,11 +29,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(Member member, Model model, HttpSession session) {
+	public String login(Member member, HttpSession session) {
 		Member resultMember = memberService.login(member);
 		System.out.println("resultMember -> " + resultMember);
 		session.setAttribute("sessionId", member.getMemberId());
-		model.addAttribute("member", resultMember);
 		return "index";
 	}
 	
@@ -52,7 +51,7 @@ public class MemberController {
 	@PostMapping("/memberAdd")
 	public String memberAdd(Member member) {
 		memberService.memberInsert(member);
-		return "redirect:/login";
+		return "redirect:/index";
 	}
 	
 	@GetMapping("/myPage")
