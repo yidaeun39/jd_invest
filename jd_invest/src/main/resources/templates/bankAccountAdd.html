@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Dashboard</title>
+  <title>신규 계좌 신청</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,6 @@
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-	<!-- th:href="@{#}" -->
     <a class="navbar-brand mr-1" th:href="@{/index}">JD 투자뱅크</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" th:href="@{#}">
@@ -78,10 +77,10 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
   
           <div class="dropdown-divider"></div>
-          	<div th:if="${member} != null">
+          	<div th:if="${session.sessionId} != null">
           <a class="dropdown-item" th:href="@{/logout}">LOGOUT</a>
           	</div>
-          	<div th:unless="${member} != null">
+          	<div th:unless="${session.sessionId} != null">
          		<a class="dropdown-item" th:href="@{/login}" data-toggle="modal" data-target="#loginModal">LOGIN</a>
         		<a class="dropdown-item" th:href="@{/memberAdd}" data-toggle="modal" data-target="#singupModal">SIGNUP</a>
         	</div>
@@ -103,7 +102,7 @@
         </a>
       </li>
       
-      <div th:if="${member} != null">
+      <div th:if="${session.sessionId} != null">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" th:href="@{#}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
@@ -111,9 +110,10 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdo0wn">
           <h6 class="dropdown-header">My Page</h6>
-          <a class="dropdown-item" th:href="@{/myPage(sessionId=${session.sessionId})}">내정보보기</a>
-          <a class="dropdown-item" th:href="@{#}">계좌신청</a>
-          <a class="dropdown-item" th:href="@{#}">계좌목록</a>
+          <a class="dropdown-item" th:href="@{/myPage}">내정보보기</a>
+          <a class="dropdown-item" th:href="@{/bankAccountAdd}">계좌신청</a>
+          <a class="dropdown-item" th:href="@{/bankAccountList}">승인전계좌목록</a>
+          <a class="dropdown-item" th:href="@{/bankAccountAccessList}">활성화계좌목록</a>
         </div>
       </li>
       </div>
@@ -139,31 +139,28 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
 
-          <li class="breadcrumb-item active">계좌 신청</li>
+          <li class="breadcrumb-item active">신규 계좌 신청</li>
         </ol>
 
 
-<!--이 부분부터 수정해야 합니다. -->
-
+<!-- 계좌신청 화면 -->
+<form action="/bankAccountAdd" method="post">
 	<table class="table table-bordered">
 		<tr>
-			<th>아이디</th>
-			<td th:text="${member.memberId}"></td>
+			<th>계좌종류</th>
+				<td>
+					<select id="accountName" name="accountName">
+						<option value="키움증권계좌">키움증권계좌</option>
+						<option value="한화투자증권계좌">한화투자증권계좌</option>
+						<option value="카카오증권계좌">카카오증권계좌</option>						
+					</select>
+				</td>
 		</tr>
 		<tr>
-			<th>이름</th>
-			<td th:text="${member.memberName}"></td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td th:text="${member.memberAddress}"></td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td th:text="${member.memberPhone}"></td>
+			<td><input type="submit" id="submitBtn" value="계좌신청"></td>
 		</tr>
 	</table>
-
+</form>
 </div>
     <!-- /.content-wrapper -->
 
@@ -174,6 +171,7 @@
   <a class="scroll-to-top rounded" th:href="@{#}">
     <i class="fas fa-angle-up"></i>
   </a>
+
 
   <!-- Logout Modal-->
   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

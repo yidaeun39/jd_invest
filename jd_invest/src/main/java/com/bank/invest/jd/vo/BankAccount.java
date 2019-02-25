@@ -7,7 +7,7 @@ public class BankAccount {
 	private String accountNumber;
 	private String memberId;
 	private String accountName;
-	private String accountDeposit;
+	private int accountDeposit;
 	private String accountBranch;
 	private String accountManager;
 	public String getAccountNumber() {
@@ -28,10 +28,10 @@ public class BankAccount {
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
 	}
-	public String getAccountDeposit() {
+	public int getAccountDeposit() {
 		return accountDeposit;
 	}
-	public void setAccountDeposit(String accountDeposit) {
+	public void setAccountDeposit(int accountDeposit) {
 		this.accountDeposit = accountDeposit;
 	}
 	public String getAccountBranch() {

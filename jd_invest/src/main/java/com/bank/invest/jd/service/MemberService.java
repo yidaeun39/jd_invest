@@ -39,11 +39,11 @@ public class MemberService {
 		return result;
 		
 	}
-	
+
 	public Member getOneMember(String sessionId) {
+		System.out.println("MemberService - getOneMember 메서드 실행");
 		//memberMapper내의 getOneMember메서드 호출후 리턴
 		return memberMapper.getOneMember(sessionId);
-		
 	}
 	
 	

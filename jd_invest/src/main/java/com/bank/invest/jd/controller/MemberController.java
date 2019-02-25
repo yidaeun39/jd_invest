@@ -32,8 +32,8 @@ public class MemberController {
 		System.out.println("resultMember -> " + resultMember);
 		//sessionId에 입력된 id값 저장
 		session.setAttribute("sessionId", resultMember.getMemberId());
+		session.setAttribute("memberPw", resultMember.getMemberPw());
 		session.setAttribute("memberAddress", resultMember.getMemberAddress());
-		
 		//index 화면으로 이동
 		return "index";	
 	}
@@ -62,9 +62,10 @@ public class MemberController {
 	}
 	
 	@GetMapping("/myPage")
-	public String getOneMember(Model model, @RequestParam(value="sessionId")String sessionId) {
+	public String getOneMember(HttpSession session, Model model) {
+		System.out.println("MemberController - getOneMember 메서드 실행");
 		//memberService내의 getOneMember메서드 호출하여 member변수에 저장
-		Member member = memberService.getOneMember(sessionId);
+		Member member = memberService.getOneMember((String)session.getAttribute("sessionId"));
 		//값이 저장된 member를 화면으로 addAttribute
 		model.addAttribute("member",member);
 		System.out.println("mypage->"+member);

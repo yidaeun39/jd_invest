@@ -31,7 +31,7 @@
 			#{branchCode})
 	</insert>
 	
-	<select id="getOneMember" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
+	<select id="getOneMember" parameterType="String" resultType="com.bank.invest.jd.vo.Member">
 		SELECT 
 			m.member_id AS memberId,
 			m.member_pw AS memberPw,
@@ -40,7 +40,6 @@
 			m.member_phone AS memberPhone		
 		FROM member AS m JOIN management AS g 
 		ON m.branch_code = g.branch_code
-		WHERE member_id = #{session.sessionId}
-	</select>
-	
+		WHERE member_id = #{sessionId}
+	</select>	
 </mapper>

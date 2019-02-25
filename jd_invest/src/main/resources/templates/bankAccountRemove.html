@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>MY PAGE</title>
+  <title>신규 계좌 신청</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -139,31 +139,17 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
 
-          <li class="breadcrumb-item active">MyPage</li>
+          <li class="breadcrumb-item active">신규 계좌 신청</li>
         </ol>
 
 
-
-
-	<table class="table table-bordered">
-		<tr>
-			<th>아이디</th>
-			<td th:text="${member.memberId}"></td>
-		</tr>
-		<tr>
-			<th>이름</th>
-			<td th:text="${member.memberName}"></td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td th:text="${member.memberAddress}"></td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td th:text="${member.memberPhone}"></td>
-		</tr>
-	</table>
-
+<!-- 계좌신청 화면 -->
+<form action="/bankAccountAdd" method="post">
+	계좌 생성을 취소하시겠습니까?
+	<input type="text" name="memberPw">
+	<input type="hidden" name="accountNumber">
+	<input type="submit" value="취소">
+</form>
 </div>
     <!-- /.content-wrapper -->
 
