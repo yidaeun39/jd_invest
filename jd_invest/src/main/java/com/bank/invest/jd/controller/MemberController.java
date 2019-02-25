@@ -18,47 +18,57 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/index")
-	public String index() {
-		return "index";
-	}
-	
+
 	@GetMapping("/login")
 	public String login() {
+		//로그인 화면으로 이동
 		return "login";
 	}
 	
 	@PostMapping("/login")
-	public String login(Member member, HttpSession session) {
-		Member resultMember = memberService.login(member);
+	public String login(HttpSession session, Member member) {
+		//memberService내의 login 메서드 호출
+		Member resultMember = memberService.login(member);		
 		System.out.println("resultMember -> " + resultMember);
-		session.setAttribute("sessionId", member.getMemberId());
-		return "index";
+		//sessionId에 입력된 id값 저장
+		session.setAttribute("sessionId", resultMember.getMemberId());
+		session.setAttribute("memberAddress", resultMember.getMemberAddress());
+		
+		//index 화면으로 이동
+		return "index";	
 	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		//세션 초기화
+		session.invalidate();		
 		System.out.println("session 초기화 완료");
+		//index 화면으로 리다이렉트
 		return "redirect:/index";
 	}
 	
 	@GetMapping("/memberAdd")
 	public String memberAdd() {
+		//memberAdd 화면으로 이동 
 		return "memberAdd";
 	}
 	
 	@PostMapping("/memberAdd")
 	public String memberAdd(Member member) {
-		memberService.memberInsert(member);
+		//memberService 내의 memberAdd메서드 호출
+		memberService.memberAdd(member);
+		//index 화면으로 리다이렉트
 		return "redirect:/index";
 	}
 	
 	@GetMapping("/myPage")
-	public String myPage(@RequestParam(value="sessionId")String sessionId, Model model) {
-		Member member = memberService.myPage(sessionId);
+	public String getOneMember(Model model, @RequestParam(value="sessionId")String sessionId) {
+		//memberService내의 getOneMember메서드 호출하여 member변수에 저장
+		Member member = memberService.getOneMember(sessionId);
+		//값이 저장된 member를 화면으로 addAttribute
 		model.addAttribute("member",member);
 		System.out.println("mypage->"+member);
+		//myPage 화면으로 이동
 		return "myPage";
 	}
 	

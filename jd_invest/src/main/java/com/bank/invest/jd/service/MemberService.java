@@ -15,11 +15,14 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	
 	public Member login(Member member) {
+		//memberMapper내에 login메서드 호출
 		Member resultMember = memberMapper.login(member);
+		//리턴된 값을 resultMember에 저장후 리턴
 		return resultMember;
 	}
 	
-	public int memberInsert(Member member) {
+	public int memberAdd(Member member) {
+		//주소별로 지점코드를 지정
 		if(member.getMemberAddress().equals("서신점")) {
 			member.setBranchCode("b001");
 		} else if(member.getMemberAddress().equals("호성점")) {
@@ -30,15 +33,16 @@ public class MemberService {
 			member.setBranchCode("b004");
 		} 
 		System.out.println("branchCode 확인 -> " + member.getBranchCode());
+		//memberMapper내의 memberInsert메서드 호출 후 result변수에 저장후 리턴
 		int result = memberMapper.memberInsert(member);
 		System.out.println("INSERT 쿼리 실행 여부 -> " + result);
 		return result;
 		
 	}
 	
-	public Member myPage(String sessionId) {
-		
-		return memberMapper.myPage(sessionId);
+	public Member getOneMember(String sessionId) {
+		//memberMapper내의 getOneMember메서드 호출후 리턴
+		return memberMapper.getOneMember(sessionId);
 		
 	}
 	

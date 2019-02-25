@@ -7,7 +7,8 @@
 	<select id="login" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
 		SELECT
 			member_id AS memberId,
-			member_pw AS memberPw
+			member_pw AS memberPw,
+			member_address AS memberAddress
 		FROM member
 		WHERE member_id = #{memberId}
 		AND member_pw = #{memberPw}
@@ -30,7 +31,7 @@
 			#{branchCode})
 	</insert>
 	
-	<select id="myPage" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
+	<select id="getOneMember" parameterType="com.bank.invest.jd.vo.Member" resultType="com.bank.invest.jd.vo.Member">
 		SELECT 
 			m.member_id AS memberId,
 			m.member_pw AS memberPw,

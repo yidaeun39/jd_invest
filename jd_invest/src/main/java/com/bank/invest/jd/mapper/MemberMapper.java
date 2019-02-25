@@ -13,6 +13,6 @@ public interface MemberMapper {
 	int memberInsert(Member member);
 	
 	// 마이 페이지 SELECT문
-	Member myPage(String sessionId);
+	Member getOneMember(String sessionId);
 	
 }

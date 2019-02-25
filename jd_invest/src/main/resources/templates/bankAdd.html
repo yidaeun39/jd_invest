@@ -139,31 +139,32 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
 
-          <li class="breadcrumb-item active">MyPage</li>
+          <li class="breadcrumb-item active">계좌신청</li>
         </ol>
 
 
-
-
+<!-- 계좌신청 화면 -->
+<form action="/bankAdd" method="post">
 	<table class="table table-bordered">
 		<tr>
-			<th>아이디</th>
-			<td th:text="${member.memberId}"></td>
+			<th>계좌종류</th>
+				<td>
+					<select id="accountName" name="accountName">
+						<option value="키움증권계좌">키움증권계좌</option>
+						<option value="한화투자증권계좌">한화투자증권계좌</option>
+						<option value="카카오증권계좌">카카오증권계좌</option>						
+					</select>
+				</td>
 		</tr>
 		<tr>
-			<th>이름</th>
-			<td th:text="${member.memberName}"></td>
+			<th>예수금</th>
+			<td><input type="text" id="accountDeposit" name="accountDeposit"></td>
 		</tr>
 		<tr>
-			<th>주소</th>
-			<td th:text="${member.memberAddress}"></td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td th:text="${member.memberPhone}"></td>
+			<td><input type="submit" id="submitBtn" value="계좌신청"></td>
 		</tr>
 	</table>
-
+</form>
 </div>
     <!-- /.content-wrapper -->
 

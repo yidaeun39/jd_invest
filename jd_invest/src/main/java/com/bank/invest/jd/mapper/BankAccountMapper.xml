@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bank.invest.jd.mapper.BankAccountMapper">
+	<!--매니저 값을 호출하는 SELECT 쿼리-->
+	<select id="selectManager" parameterType="String" resultType="com.bank.invest.jd.vo.BankAccount">
+		SELECT 
+			branch_manager as accountManager
+		FROM management
+		WHERE branch_name = #{accountBranch}		
+	</select>
+	
+	<!-- 자동생성 하는 쿼리 -->
+	<select id="autoNumber" resultType="int">
+		SELECT max(CAST(substring(account_number,9) AS DECIMAL)) as maxcol 
+		FROM bankaccount				
+	</select>
+	
+	<!--계좌 INSERT 쿼리  -->
+	<insert id="bankInsert" parameterType="com.bank.invest.jd.vo.BankAccount"> 
+		INSERT INTO bankaccount 
+		VALUES(
+			#{accountNumber},
+			#{memberId},
+			#{accountName},
+			#{accountDeposit},
+			#{accountBranch},
+			#{accountManager}
+		)
+	</insert> 	
+	
+	
+</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
