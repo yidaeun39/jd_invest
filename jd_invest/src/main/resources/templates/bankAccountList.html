@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>활성화 계좌 목록</title>
+  <title>승인 전 계좌 목록</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -71,28 +71,41 @@
 
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" th:href="@{/index}">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      
-      <div th:if="${session.sessionId} != null">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" th:href="@{#}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>My Page</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdo0wn">
-          <h6 class="dropdown-header">My Page</h6>
-          <a class="dropdown-item" th:href="@{/myPage}">내정보보기</a>
-          <a class="dropdown-item" th:href="@{/bankAccountAdd}">계좌신청</a>
-          <a class="dropdown-item" th:href="@{/bankAccountList}">승인전계좌목록</a>
-          <a class="dropdown-item" th:href="@{/bankAccountAccessList}">활성화계좌목록</a>
-        </div>
-      </li>
-      </div>
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/index}"> <i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Dashboard</span>
+			</a></li>
+			<!--member 변수가 null이 아닐 경우 호출된 화면 -->
+			<div th:if="${session.sessionId} != null">
+				<div th:if="${session.sessionId.equals('admin')}">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" th:href="@{#}" id="pagesDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>ADMIN PAGE</span>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="pagesDropdo0wn">
+							<h6 class="dropdown-header">ADMIN PAGE</h6>
+							<a class="dropdown-item" th:href="@{/adminAccessList}">승인전계좌목록</a>
+						</div></li>
+				</div>
+				<div th:unless="${session.sessionId.equals('admin')}">
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" th:href="@{#}" id="pagesDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+						<i class="fas fa-fw fa-folder"></i>
+						<span>MY PAGE</span>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="pagesDropdo0wn">
+							<h6 class="dropdown-header">MY PAGE</h6>
+							<a class="dropdown-item" th:href="@{/myPage}">내정보보기</a> <a
+								class="dropdown-item" th:href="@{/bankAccountAdd}">계좌신청</a> <a
+								class="dropdown-item" th:href="@{/bankAccountList}">승인전계좌목록</a>
+							<a class="dropdown-item" th:href="@{/bankAccountAccessList}">활성화계좌목록</a>
+						</div></li>
+				</div>
+			</div>
+
       
       
       
@@ -115,12 +128,12 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
 
-          <li class="breadcrumb-item active">활성화 계좌 목록</li>
+          <li class="breadcrumb-item active">승인 전 계좌 목록</li>
         </ol>
 
 
 <!-- 내 계좌 리스트 -->
-				<div th:each="d : ${accountDepositList}">
+				<div th:each="d : ${accountDepositLsit}">
 					<div th:if="${d.accountDeposit == 0}">
 						<table class="table table-bordered">
 							<tr>
@@ -136,6 +149,7 @@
 								<th>예수금</th>
 								<td>
 									<div>승인 대기</div>
+									<a th:href="@{/bankAccountRemove(accountNumber=${d.accountNumber})}">취소</a>
 								</td>
 							</tr>
 							<tr>

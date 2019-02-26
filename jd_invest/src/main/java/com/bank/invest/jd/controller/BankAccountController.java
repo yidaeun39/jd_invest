@@ -1,6 +1,5 @@
 package com.bank.invest.jd.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +23,7 @@ public class BankAccountController {
 		return "bankAccountAdd";
 	}
 	
+	// 일반 회원 계좌 신청
 	@PostMapping("/bankAccountAdd")
 	public String backAdd(HttpSession session, BankAccount bankAccount) {
 		//sessionId 값을 bankAccount 객체 내의 memberId에 저장
@@ -33,9 +33,10 @@ public class BankAccountController {
 		//bankAccountService 내의 bankAdd메서드에 매개변수 babkAccount를 입력함 
 		int result = bankAccountService.bankAccountAdd(bankAccount);
 		System.out.println("bankAdd 결과는 : "+result);
-		return "bankAccountList";
+		return "redirect:/bankAccountList";
 	}
 	
+	// 승인 전 계좌 목록 조회
 	@GetMapping("/bankAccountList") 
 	public String bankAccountList(HttpSession session, Model model) {
 		String memberid = (String)session.getAttribute("sessionId");
@@ -44,7 +45,8 @@ public class BankAccountController {
 		model.addAttribute("accountDepositLsit", bankAccountList);
 		return "bankAccountList";
 	}
-	
+		
+	// 활성화 계좌 목록 조회
 	@GetMapping("/bankAccountAccessList") 
 	public String bankAccountAccessList(HttpSession session, Model model) {
 		String memberid = (String)session.getAttribute("sessionId");
@@ -53,6 +55,7 @@ public class BankAccountController {
 		return "bankAccountAccessList";
 	}
 	
+	// 일반 회원 예수금 수정
 	@PostMapping("/bankAccountAccessList")
 	public String bankAccountAccessList(BankAccount bankAccount) {
 		int result = bankAccountService.modifyAccountDeposit(bankAccount);
@@ -60,10 +63,35 @@ public class BankAccountController {
 		return "redirect:/bankAccountAccessList";
 	}
 	
+	// 승인 전 계좌 신청 취소 화면
 	@GetMapping("/bankAccountRemove")
-	public String bankAccountRemove(HttpSession session, String accountNumber, String memberPw) {
+	public String bankAccountRemove(Model model, String accountNumber) {
+		model.addAttribute("accountNumber", accountNumber);
+		return "bankAccountRemove";
+	}
+	
+	// 승인 전 계좌 신청 취소 action
+	@PostMapping("/bankAccountRemove")
+	public String bankAccountRemove(HttpSession session, Model model, String accountNumber, String memberPw) {
 		int result = bankAccountService.bankAccountRemove(session, accountNumber, memberPw);
 		System.out.println("DELETE 쿼리 실행 여부 -> " + result);
-		return "bankAccountRemove";
+		model.addAttribute("result", result);
+		return "redirect:/bankAccountList";
+	}
+	
+	// 승인 전 전체 계좌 목록 조회
+	@GetMapping("/adminAccessList")
+	public String adminAccessList(Model model) {
+		List<BankAccount> adminAccessList = bankAccountService.adminAccessList();
+		model.addAttribute("adminAccessList", adminAccessList);
+		return "adminAccessList";
+	}
+	
+	// 하나의 계좌 승인 action
+	@PostMapping("/adminAccessList")
+	public String adminAccessList(BankAccount bankAccount) {
+		int result = bankAccountService.adminAccessModfiy(bankAccount);
+		System.out.println("UPDATE 쿼리 실행 여부 -> " + result);
+		return "adminAccessList";
 	}
 }

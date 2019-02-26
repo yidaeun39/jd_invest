@@ -1,8 +1,10 @@
 package com.bank.invest.jd.service;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.SendResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,21 +44,39 @@ public class BankAccountService {
 		return result;			
 	}
 	
+	// 계좌 목록
 	public List<BankAccount> bankAccountList(String memberId) {
 		List<BankAccount> bankAccountList = bankAccountMapper.bankAccountAllSelect(memberId);
 		System.out.println("BankAccountService - bankAccountList -> " + bankAccountList);
 		return bankAccountList;
 	}
 	
+	// 일반 회원 예수금 수정
 	public int modifyAccountDeposit(BankAccount bankAccount) {
 		return bankAccountMapper.updateAccountDeposit(bankAccount);
 	}
 	
+	// 승인 전 계좌 신청 취소
 	public int bankAccountRemove(HttpSession session, String accountNumber, String memberPw) {
+		System.out.println("accountNumber -> " + accountNumber);
+		System.out.println("memberPw -> " + memberPw);
+		System.out.println("sessionPw -> " + session.getAttribute("sessionPw"));
 		int result = 0;
 		if(session.getAttribute("sessionPw").equals(memberPw)) {
 			result = bankAccountMapper.bankAccountDelete(accountNumber);
+		} else {
+			result = 0;
 		}
 		return result;
+	}
+	
+	// ADMIN 계정에서 승인 전 계좌 전체 조회
+	public List<BankAccount> adminAccessList() {
+		return bankAccountMapper.adminAccessSelect();
+	}
+	
+	// 하나의 계좌를 승인
+	public int adminAccessModfiy(BankAccount bankAccount) {
+		return bankAccountMapper.adminAccessUpdate(bankAccount);
 	}
 }

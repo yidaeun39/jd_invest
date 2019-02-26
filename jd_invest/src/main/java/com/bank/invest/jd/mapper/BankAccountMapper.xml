@@ -38,6 +38,7 @@
 		)
 	</insert>
 	
+	<!-- 전체 계좌 리스트를 조회하는 쿼리 -->
 	<select id="bankAccountAllSelect" resultType="com.bank.invest.jd.vo.BankAccount">
 		SELECT
 			account_number AS accountNumber,
@@ -49,16 +50,37 @@
 		WHERE member_id = #{memberId}
 	</select>
 	
+	<!-- 하나의 계좌의 예수금을 업데이트하는 쿼리 -->
 	<update id="updateAccountDeposit" parameterType="com.bank.invest.jd.vo.BankAccount">
 		UPDATE bankaccount SET 
 			account_deposit = #{accountDeposit}
 		WHERE account_number = #{accountNumber}
 	</update>
 	
+	<!-- 승인 전 계좌를 취소하는 쿼리 -->
 	<delete id="bankAccountDelete" parameterType="com.bank.invest.jd.vo.Member">
 		DELETE FROM bankaccount
 		WHERE account_number = #{accountNumber}
 	</delete>
+	
+	<!-- 전체 승인 전 계좌를 조회하는 쿼리 -->
+	<select id="adminAccessSelect" resultType="com.bank.invest.jd.vo.BankAccount">
+		SELECT
+			account_number AS accountNumber,
+			member_id AS memberId,
+			account_name AS accountName,
+			account_branch AS accountBranch,
+			account_manager AS accountManager
+		FROM bankaccount
+		WHERE account_deposit = 0
+	</select>
+	
+	<!-- 하나의 계좌의 컬럼을 수정하는 쿼리 -->
+	<update id="adminAccessUpdate" parameterType="com.bnk.invest.jd.vo.BankAccount">
+		UPDATE bankaccount
+		SET account_deposit = 1
+		WHERE account_number = #{accountNumber}
+	</update>
 </mapper>
 	
 	

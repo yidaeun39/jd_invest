@@ -2,33 +2,29 @@
 <html xmlns:th='http://www.thymleaf.org'>
 
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>JD 투자뱅크</title>
+<title>SB Admin - Dashboard</title>
 
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- Page level plugin CSS-->
+<link href="vendor/datatables/dataTables.bootstrap4.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
 
-<!-- 자바 스크립트 & 제이쿼리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-	/* 유효성 검사 */
-	$(document).ready(function()) {
-		$('#submit1').click(function(){
-			if ($('#sessionId').val() == null) {
-				alert("로그인해주세요!");
-				return false;
-			}
-		});
-	}
-</script>
-
 </head>
+
 <body id="page-top">
 
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -147,6 +143,13 @@
 						</div></li>
 				</div>
 			</div>
+
+
+
+			<li class="nav-item"><a class="nav-link" th:href="@{#}"> <i
+					class="fas fa-fw fa-chart-area"></i> <span>Charts</span></a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{#}"> <i
+					class="fas fa-fw fa-table"></i> <span>Tables</span></a></li>
 		</ul>
 
 		<div id="content-wrapper">
@@ -170,7 +173,7 @@
 								<div class="mr-5">신규 계좌 신청</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1"
-								th:href="@{/bankAccountAdd}" th:id="submit1"><span class="float-left">View
+								th:href="@{/bankAccountAdd}"> <span class="float-left">View
 									Details</span> <span class="float-right"> <i
 									class="fas fa-angle-right"></i>
 							</span>
@@ -215,7 +218,7 @@
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-life-ring"></i>
 								</div>
-								<div class="mr-5">구매 리스트</div>
+								<div class="mr-5">13 New Tickets!</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1"
 								th:href="@{#}"> <span class="float-left">View Details</span>
@@ -224,6 +227,18 @@
 							</a>
 						</div>
 					</div>
+				</div>
+
+				<!-- Area Chart Example-->
+				<div class="card mb-3">
+					<div class="card-header">
+						<i class="fas fa-chart-area"></i> Area Chart Example
+					</div>
+					<div class="card-body">
+						<canvas id="myAreaChart" width="100%" height="30"></canvas>
+					</div>
+					<div class="card-footer small text-muted">Updated yesterday
+						at 11:59 PM</div>
 				</div>
 
 				<!-- DataTables Example -->

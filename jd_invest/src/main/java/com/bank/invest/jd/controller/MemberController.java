@@ -32,7 +32,7 @@ public class MemberController {
 		System.out.println("resultMember -> " + resultMember);
 		//sessionId에 입력된 id값 저장
 		session.setAttribute("sessionId", resultMember.getMemberId());
-		session.setAttribute("memberPw", resultMember.getMemberPw());
+		session.setAttribute("sessionPw", resultMember.getMemberPw());
 		session.setAttribute("memberAddress", resultMember.getMemberAddress());
 		//index 화면으로 이동
 		return "index";	
