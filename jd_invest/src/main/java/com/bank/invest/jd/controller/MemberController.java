@@ -1,5 +1,8 @@
 package com.bank.invest.jd.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bank.invest.jd.service.MemberService;
 import com.bank.invest.jd.vo.Member;
@@ -35,7 +39,7 @@ public class MemberController {
 		session.setAttribute("sessionPw", resultMember.getMemberPw());
 		session.setAttribute("memberAddress", resultMember.getMemberAddress());
 		//index 화면으로 이동
-		return "index";	
+		return "index";
 	}
 	
 	@GetMapping("/logout")
@@ -74,4 +78,12 @@ public class MemberController {
 	}
 	
 	
+	@GetMapping(value = "/sessionId", produces = { "application/json" })
+	public @ResponseBody Map<String, Object> ajax(HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", "홍길동");
+		return map;
+	}	
+	
+
 }

@@ -20,11 +20,20 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-
+  <!-- 자바 스크립트 & 제이쿼리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(window).on("load", function() {
+		let session = '[[${session.sessionId}]]';
+		if(session == '') {
+			alert('먼저 로그인해주세요!');
+			window.location.href = '/index';
+		}
+	});
+</script>
 </head>
 
-<body id="page-top">
-
+<body id="page-top" th:if="${session.sessionId != null}">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" th:href="@{/index}">JD 투자뱅크</a>
 
@@ -35,7 +44,7 @@
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <input id="searchfor" type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button">
             <i class="fas fa-search"></i>
@@ -46,30 +55,6 @@
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" th:href="@{#}" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-          <a class="dropdown-item" th:href="@{#}">Action</a>
-          <a class="dropdown-item" th:href="@{#}">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" th:href="@{#}">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" th:href="@{#}" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-          <a class="dropdown-item" th:href="@{#}">Action</a>
-          <a class="dropdown-item" th:href="@{#}">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" th:href="@{#}">Something else here</a>
-        </div>
-      </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" th:href="@{#}" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
@@ -78,13 +63,9 @@
   
           <div class="dropdown-divider"></div>
           	<div th:if="${session.sessionId} != null">
+          	<a class="dropdown-item" th:href="@{/myPage}">MYPAGE</a>
           <a class="dropdown-item" th:href="@{/logout}">LOGOUT</a>
           	</div>
-          	<div th:unless="${session.sessionId} != null">
-         		<a class="dropdown-item" th:href="@{/login}" data-toggle="modal" data-target="#loginModal">LOGIN</a>
-        		<a class="dropdown-item" th:href="@{/memberAdd}" data-toggle="modal" data-target="#singupModal">SIGNUP</a>
-        	</div>
-        	
         </div>
       </li>
     </ul>
@@ -184,82 +165,7 @@
   <a class="scroll-to-top rounded" th:href="@{#}">
     <i class="fas fa-angle-up"></i>
   </a>
-
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">LOGIN 하시겠습니까?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-		    <form th:action="@{/login}" method="post">
-				아이디 : <input type="text" class="form-control" name="memberId"><br>
-				비밀번호 : <input type="password" class="form-control" name="memberPw"><br>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <input type="submit" class="btn btn-primary" th:value="로그인">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
   
-  <div class="modal fade" id="singupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">회원가입 하시겠습니까?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-		    	<form action="/memberAdd" method="post">
-		<table>
-			<tr>
-				<th>아이디</th>
-				<td><input type="text" class="form-control" id="memberId" name="memberId"></td>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><input type="text" class="form-control" id="memberPw" name="memberPw"></td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td><input type="text" class="form-control" id="memberName" name="memberName"></td>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<td>
-					<select id="memberAddress" class="form-control" name="memberAddress">
-						<option value="서신점">서신점</option>
-						<option value="호성점">호성점</option>
-						<option value="봉동점">봉동점</option>
-						<option value="부산점">부산점</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<th>휴대폰번호</th>
-				<td><input type="text" class="form-control" id="memberPhone" name="memberPhone"></td>
-			</tr>
-		</table>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <input type="submit" class="btn btn-primary" th:value="회원가입">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -278,7 +184,5 @@
   <!-- Demo scripts for this page-->
   <script src="js/demo/datatables-demo.js"></script>
   <script src="js/demo/chart-area-demo.js"></script>
-
 </body>
-
 </html>

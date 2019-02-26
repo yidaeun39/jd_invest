@@ -21,9 +21,20 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 
+  <!-- 자바 스크립트 & 제이쿼리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(window).on("load", function() {
+		let session = '[[${session.sessionId}]]';
+		if(session == '') {
+			alert('먼저 로그인해주세요!');
+			window.location.href = '/index';
+		}
+	});
+</script>
 </head>
 
-<body id="page-top">
+<body id="page-top" th:if="${session.sessionId != null}">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" th:href="@{/index}">JD 투자뱅크</a>

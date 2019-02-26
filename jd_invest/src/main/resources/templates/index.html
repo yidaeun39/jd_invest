@@ -17,20 +17,50 @@
 <!-- 자바 스크립트 & 제이쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	/* 유효성 검사 */
-	$(document).ready(function()) {
-		$('#submit1').click(function(){
-			if ($('#sessionId').val() == null) {
-				alert("로그인해주세요!");
+  	/*유효성 검사 */
+	$(document).ready(function() {
+		let sessionId = '[[${session.sessionId}]]';
+		console.log(sessionId + '<--세션아이디' );
+		 $('#bankAccountAddBtn').click(function(){
+			if (sessionId == '') {
+				alert('먼저 로그인해주세요!');
 				return false;
 			}
 		});
-	}
+		$('#bankAccountListBtn').click(function() {
+			if (sessionId == '') {
+				alert('먼저 로그인해주세요!');
+				return false;
+			}
+		});
+		$('#bankAccountAccessListBtn').click(function() {
+			if (sessionId == '') {
+				alert('먼저 로그인해주세요!');
+				return false;
+			}
+		});
+			
+		
+		$('#loginBtn').click(function() {
+			if($('#memberId').val() == '') {
+				$('#memberId').focus();
+				$('#memberId').attr('placeholder', 'ID를 입력해주세요.');
+				return false;
+			}
+			if($('#memberPw').val() == '') {
+				$('#memberPw').focus();
+				$('#memberPw').attr('placeholder', 'PASSWORD를 입력해주세요.');
+				return false;
+			}
+			
+			
+		});
+	}); 
 </script>
 
 </head>
 <body id="page-top">
-
+	<input id="sessionId" type="hidden" th:value="${session.sessionId}">
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 		<!-- th:href="@{#}" -->
 		<a class="navbar-brand mr-1" th:href="@{/index}">JD 투자뱅크</a>
@@ -169,9 +199,9 @@
 								</div>
 								<div class="mr-5">신규 계좌 신청</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1"
-								th:href="@{/bankAccountAdd}" th:id="submit1"><span class="float-left">View
-									Details</span> <span class="float-right"> <i
+							<a id="bankAccountAddBtn" class="card-footer text-white clearfix small z-1"
+								th:href="@{/bankAccountAdd}" ><span class="float-left">View
+									Details</span><span class="float-right"> <i
 									class="fas fa-angle-right"></i>
 							</span>
 							</a>
@@ -185,7 +215,7 @@
 								</div>
 								<div class="mr-5">승인 전 계좌 목록</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1"
+							<a id="bankAccountListBtn" class="card-footer text-white clearfix small z-1"
 								th:href="@{/bankAccountList}"> <span class="float-left">View
 									Details</span> <span class="float-right"> <i
 									class="fas fa-angle-right"></i>
@@ -201,7 +231,7 @@
 								</div>
 								<div class="mr-5">활성화 계좌 목록</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1"
+							<a id="bankAccountAccessListBtn" class="card-footer text-white clearfix small z-1"
 								th:href="@{/bankAccountAccessList}"> <span
 								class="float-left">View Details</span> <span class="float-right">
 									<i class="fas fa-angle-right"></i>
@@ -758,13 +788,13 @@
 				</div>
 				<div class="modal-body">
 					<form th:action="@{/login}" method="post">
-						아이디 : <input type="text" class="form-control" name="memberId"><br>
-						비밀번호 : <input type="password" class="form-control" name="memberPw"><br>
+						아이디 : <input type="text" class="form-control" name="memberId" id="memberId"><br>
+						비밀번호 : <input type="password" class="form-control" name="memberPw" id="memberPw"><br>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-primary" th:value="로그인">
+					<input type="submit" class="btn btn-primary" id="loginBtn" th:value="로그인">
 					</form>
 				</div>
 			</div>

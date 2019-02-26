@@ -76,7 +76,7 @@
 	</select>
 	
 	<!-- 하나의 계좌의 컬럼을 수정하는 쿼리 -->
-	<update id="adminAccessUpdate" parameterType="com.bnk.invest.jd.vo.BankAccount">
+	<update id="adminAccessUpdate" parameterType="com.bank.invest.jd.vo.BankAccount">
 		UPDATE bankaccount
 		SET account_deposit = 1
 		WHERE account_number = #{accountNumber}
