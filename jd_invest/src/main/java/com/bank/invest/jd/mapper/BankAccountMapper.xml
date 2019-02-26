@@ -14,7 +14,7 @@
 	
 	<!-- 자동생성 하는 쿼리 -->
 	<select id="autoNumber" resultType="int">
-		SELECT max(CAST(substring(account_number,9) AS DECIMAL)) as maxcol 
+		SELECT max(CAST(substring(account_number,14) AS DECIMAL)) as maxcol 
 		FROM bankaccount				
 	</select>
 	

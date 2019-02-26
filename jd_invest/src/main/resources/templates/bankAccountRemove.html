@@ -105,10 +105,11 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-			<li class="nav-item active"><a class="nav-link"
-				th:href="@{/index}"> <i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Dashboard</span>
+   <ul class="sidebar navbar-nav">
+			<li class="nav-item active"><a class="nav-link"> <i class="fas fa-fw fa-tachometer-alt"></i>
+					<div th:if="${session.sessionId} != null">
+						<div th:text="${session.sessionId}"/>님 반갑습니다.
+				</div>
 			</a></li>
 			<!--member 변수가 null이 아닐 경우 호출된 화면 -->
 			<div th:if="${session.sessionId} != null">

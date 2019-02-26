@@ -11,4 +11,14 @@ public class IndexController {
 		//index 화면으로 이동
 		return "index";
 	}
+	
+	@GetMapping("/errorView")
+	public String errorView() {
+		return "errorView";
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}	
 }

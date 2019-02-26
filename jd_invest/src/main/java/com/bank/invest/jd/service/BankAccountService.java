@@ -1,5 +1,7 @@
 package com.bank.invest.jd.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,10 +19,14 @@ public class BankAccountService {
 	public int bankAccountAdd(BankAccount bankAccount) {
 		System.out.println("getMemberId : "+bankAccount.getMemberId());
 		System.out.println("getAccountBranch : "+bankAccount.getAccountBranch());
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+		String nowDate = sdf.format(calendar.getTime());
+		System.out.println("nowDate : " + nowDate);
 		//accountCode 자동생성하는 메서드 
 		int max = 0;
-		String tempNumber = "account_";
-		String accountNumber = "account_1";
+		String tempNumber = nowDate+"0";
+		String accountNumber = nowDate+"01";
 		
 		int resultNumber = bankAccountMapper.autoNumber();
 		if(resultNumber != 0){

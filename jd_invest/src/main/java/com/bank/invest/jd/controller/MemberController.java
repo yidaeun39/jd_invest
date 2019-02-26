@@ -30,7 +30,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(HttpSession session, Member member) {
+	public String login(HttpSession session, Model model, Member member) {
 		//memberService내의 login 메서드 호출
 		Member resultMember = memberService.login(member);		
 		System.out.println("resultMember -> " + resultMember);
@@ -38,6 +38,7 @@ public class MemberController {
 		session.setAttribute("sessionId", resultMember.getMemberId());
 		session.setAttribute("sessionPw", resultMember.getMemberPw());
 		session.setAttribute("memberAddress", resultMember.getMemberAddress());
+		model.addAttribute("member", resultMember);
 		//index 화면으로 이동
 		return "index";
 	}

@@ -92,6 +92,6 @@ public class BankAccountController {
 	public String adminAccessList(BankAccount bankAccount) {
 		int result = bankAccountService.adminAccessModfiy(bankAccount);
 		System.out.println("UPDATE 쿼리 실행 여부 -> " + result);
-		return "adminAccessList";
+		return "redirect:/adminAccessList";
 	}
 }
