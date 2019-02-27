@@ -42,4 +42,15 @@
 		ON m.branch_code = g.branch_code
 		WHERE member_id = #{sessionId}
 	</select>	
+	
+	<!-- 회원 전체를 조회하는 쿼리 -->
+	<select id="memberAllSelect" resultType="com.bank.invest.jd.vo.Member">
+		SELECT
+			member_id AS memberID,
+			member_name AS memberName,
+			member_address AS memberAddress,
+			member_phone AS memberPhone,
+			branch_code AS branchCode
+		FROM member
+	</select>
 </mapper>

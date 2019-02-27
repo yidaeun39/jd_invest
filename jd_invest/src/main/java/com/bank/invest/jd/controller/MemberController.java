@@ -86,5 +86,10 @@ public class MemberController {
 		return map;
 	}	
 	
+	@GetMapping("adminMemberList")
+	public String getMemberAllList(Model model) {
+		model.addAttribute("memberList", memberService.getMemberAllList());
+		return "adminMemberList";
+	}
 
 }

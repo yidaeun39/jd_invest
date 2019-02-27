@@ -1,5 +1,7 @@
 package com.bank.invest.jd.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +48,9 @@ public class MemberService {
 		return memberMapper.getOneMember(sessionId);
 	}
 	
+	// 멤버 리스트
+	public List<Member> getMemberAllList() {
+		return memberMapper.memberAllSelect();
+	}
 	
 }

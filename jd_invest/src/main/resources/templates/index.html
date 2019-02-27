@@ -27,6 +27,7 @@
 				return false;
 			}
 		});
+		 
 		$('#bankAccountListBtn').click(function() {
 			if (sessionId == '') {
 				alert('먼저 로그인해주세요!');
@@ -41,16 +42,18 @@
 		});
 			
 		
-		$('#loginBtn').click(function() {
-			if($('#memberId').val() == '') {
-				$('#memberId').focus();
-				$('#memberId').attr('placeholder', 'ID를 입력해주세요.');
+	
+		
+		$('#joinBtn').click(function() {
+			if($('#joinId').val() == '') {
+				$('#joinId').focus();
+				$('#joinId').attr('placeholder', 'ID를 입력해주세요.');
 				return false;
-			} else if($('#memberPw').val() == '') {
-				$('#memberPw').focus();
-				$('#memberPw').attr('placeholder', 'PASSWORD를 입력해주세요.');
+			} else if($('#joinPw').val() == '') {
+				$('#joinPw').focus();
+				$('#joinPw').attr('placeholder', 'PW를 입력해주세요.');
 				return false;
-			}	
+			}
 		});
 		
 		$('#logoutBtn').click(function() {
@@ -66,6 +69,30 @@
 		});
 	}); 
 </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2013',  1000,      400],
+          ['2014',  1170,      460],
+          ['2015',  660,       1120],
+          ['2016',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 </head>
 <body id="page-top">
@@ -628,6 +655,7 @@
 		</div>
 	</div>	
 			<!-- /.container-fluid -->
+	
 
 			<!-- Sticky Footer -->
 			<footer class="sticky-footer">
@@ -640,6 +668,8 @@
 
 		</div>
 		<!-- /.content-wrapper -->
+
+</div>
 
 	</div>
 	<!-- /#wrapper -->
@@ -693,22 +723,21 @@
 						<table>
 							<tr>
 								<th>아이디</th>
-								<td><input type="text" class="form-control" id="memberId"
-									name="memberId"></td>
+								<td><input type="text" class="form-control" id="joinId" name="memberId"></td>
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><input type="text" class="form-control" id="memberPw"
+								<td><input type="password" class="form-control" id="joinPw"
 									name="memberPw"></td>
 							</tr>
 							<tr>
 								<th>이름</th>
-								<td><input type="text" class="form-control" id="memberName"
+								<td><input type="text" class="form-control" id="joinName"
 									name="memberName"></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><select id="memberAddress" class="form-control"
+								<td><select id="joinAddress" class="form-control"
 									name="memberAddress">
 										<option value="서신점">서신점</option>
 										<option value="호성점">호성점</option>
@@ -719,14 +748,14 @@
 							<tr>
 								<th>휴대폰번호</th>
 								<td><input type="text" class="form-control"
-									id="memberPhone" name="memberPhone"></td>
+									id="joinPhone" name="memberPhone"></td>
 							</tr>
 						</table>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-primary" th:value="회원가입">
+					<input id="joinBtn" type="submit" class="btn btn-primary" th:value="회원가입">
 					</form>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 package com.bank.invest.jd.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.bank.invest.jd.vo.Member;
@@ -14,5 +16,8 @@ public interface MemberMapper {
 	
 	// 마이 페이지 SELECT문
 	Member getOneMember(String sessionId);
+	
+	// 멤버 리스트 전체 조회
+	List<Member> memberAllSelect();
 	
 }

@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>신규 계좌 신청</title>
+  <title>전체 회원 목록</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,6 +34,7 @@
 </head>
 
 <body id="page-top" th:if="${session.sessionId != null}">
+
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" th:href="@{/index}">JD 투자뱅크</a>
 
@@ -44,7 +45,7 @@
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        <input id="searchfor" type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button">
             <i class="fas fa-search"></i>
@@ -63,9 +64,10 @@
   
           <div class="dropdown-divider"></div>
           	<div th:if="${session.sessionId} != null">
-          	<a class="dropdown-item" th:href="@{/myPage}">MYPAGE</a>
-          <a class="dropdown-item" th:href="@{/logout}">LOGOUT</a>
+          		<a class="dropdown-item" th:href="@{/myPage}">MYPAGE</a>
+        		<a class="dropdown-item" th:href="@{/logout}">LOGOUT</a>
           	</div>
+        	
         </div>
       </li>
     </ul>
@@ -92,6 +94,7 @@
 						<div class="dropdown-menu" aria-labelledby="pagesDropdo0wn">
 							<h6 class="dropdown-header">ADMIN PAGE</h6>
 							<a class="dropdown-item" th:href="@{/adminAccessList}">승인전계좌목록</a>
+							<a class="dropdown-item" th:href="@{/adminMemberList}">전체회원목록</a>
 						</div></li>
 				</div>
 				<div th:unless="${session.sessionId.equals('admin')}">
@@ -134,42 +137,39 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
 
-          <li class="breadcrumb-item active">신규 계좌 신청</li>
+          <li class="breadcrumb-item active">전체 회원 목록</li>
         </ol>
-				<div class="row">
-					<div class="col-xl-3 col-sm-6 mb-3">
-						<div class="card text-white bg-primary o-hidden h-100">
-							<div class="card-body">
-								<div class="card-body-icon">
-									<i class="fas fa-credit-card"></i>
-								</div>
-							<div class="mr-5">계좌 종류</div>
-							<table>
-							<tr>
-								<td>
-									<select id="accountName" name="accountName">
-										<option value="키움증권계좌">키움증권계좌</option>
-										<option value="한화투자증권계좌">한화투자증권계좌</option>
-										<option value="카카오증권계좌">카카오증권계좌</option>						
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									
-								</td>
-							</tr>
-							</table>
-							</div>
-							<span class="float-left">
-							</span><span class="float-right">
-							<i class="fas fa-angle-right"></i>
-							</span>
-							</a>
-						</div>
-					</div>
-    <!-- /.content-wrapper -->
 
+
+<!-- 전체 회원 리스트 -->
+				<div th:each="m : ${memberList}">
+						<table class="table table-bordered">
+							<tr>
+								<th>아이디</th>
+								<td th:text="${m.memberId}"></td>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td th:text="${m.memberName}"></td>
+							</tr>
+							
+							<tr>
+								<th>주소</th>
+								<td th:text="${m.memberAddress}"></td>
+							</tr>
+							<tr>
+								<th>연락처</th>
+								<td th:text="${m.memberPhone}"></td>
+							</tr>
+							<tr>
+								<th>지점코드</th>
+								<td th:text="${m.branchCode}"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /.content-wrapper -->
   </div>
   <!-- /#wrapper -->
 
@@ -177,7 +177,7 @@
   <a class="scroll-to-top rounded" th:href="@{#}">
     <i class="fas fa-angle-up"></i>
   </a>
-  
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -196,5 +196,7 @@
   <!-- Demo scripts for this page-->
   <script src="js/demo/datatables-demo.js"></script>
   <script src="js/demo/chart-area-demo.js"></script>
+
 </body>
+
 </html>

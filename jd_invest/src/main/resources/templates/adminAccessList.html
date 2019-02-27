@@ -94,6 +94,7 @@
 						<div class="dropdown-menu" aria-labelledby="pagesDropdo0wn">
 							<h6 class="dropdown-header">ADMIN PAGE</h6>
 							<a class="dropdown-item" th:href="@{/adminAccessList}">승인전계좌목록</a>
+							<a class="dropdown-item" th:href="@{/adminMemberList}">전체회원목록</a>
 						</div></li>
 				</div>
 				<div th:unless="${session.sessionId.equals('admin')}">
